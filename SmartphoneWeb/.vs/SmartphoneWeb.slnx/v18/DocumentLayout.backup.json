@@ -1,0 +1,78 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\hualv\\OneDrive\\Documents\\webnc-smatphone\\SmartphoneWeb\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F9DEED2C-4F88-F7CB-0D88-65F6731186E8}|SmartphoneWeb\\SmartphoneWeb.csproj|c:\\users\\hualv\\onedrive\\documents\\webnc-smatphone\\smartphoneweb\\smartphoneweb\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9DEED2C-4F88-F7CB-0D88-65F6731186E8}|SmartphoneWeb\\SmartphoneWeb.csproj|solutionrelative:smartphoneweb\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9DEED2C-4F88-F7CB-0D88-65F6731186E8}|SmartphoneWeb\\SmartphoneWeb.csproj|c:\\users\\hualv\\onedrive\\documents\\webnc-smatphone\\smartphoneweb\\smartphoneweb\\service\\impl\\categoryimplservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9DEED2C-4F88-F7CB-0D88-65F6731186E8}|SmartphoneWeb\\SmartphoneWeb.csproj|solutionrelative:smartphoneweb\\service\\impl\\categoryimplservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9DEED2C-4F88-F7CB-0D88-65F6731186E8}|SmartphoneWeb\\SmartphoneWeb.csproj|c:\\users\\hualv\\onedrive\\documents\\webnc-smatphone\\smartphoneweb\\smartphoneweb\\views\\category\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F9DEED2C-4F88-F7CB-0D88-65F6731186E8}|SmartphoneWeb\\SmartphoneWeb.csproj|solutionrelative:smartphoneweb\\views\\category\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "C:\\Users\\hualv\\OneDrive\\Documents\\webnc-smatphone\\SmartphoneWeb\\SmartphoneWeb\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "SmartphoneWeb\\Controllers\\CategoryController.cs",
+              "ToolTip": "C:\\Users\\hualv\\OneDrive\\Documents\\webnc-smatphone\\SmartphoneWeb\\SmartphoneWeb\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "SmartphoneWeb\\Controllers\\CategoryController.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-31T05:54:20.446Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CategoryImplService.cs",
+              "DocumentMoniker": "C:\\Users\\hualv\\OneDrive\\Documents\\webnc-smatphone\\SmartphoneWeb\\SmartphoneWeb\\Service\\Impl\\CategoryImplService.cs",
+              "RelativeDocumentMoniker": "SmartphoneWeb\\Service\\Impl\\CategoryImplService.cs",
+              "ToolTip": "C:\\Users\\hualv\\OneDrive\\Documents\\webnc-smatphone\\SmartphoneWeb\\SmartphoneWeb\\Service\\Impl\\CategoryImplService.cs",
+              "RelativeToolTip": "SmartphoneWeb\\Service\\Impl\\CategoryImplService.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-31T03:39:14.322Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\hualv\\OneDrive\\Documents\\webnc-smatphone\\SmartphoneWeb\\SmartphoneWeb\\Views\\Category\\Index.cshtml",
+              "RelativeDocumentMoniker": "SmartphoneWeb\\Views\\Category\\Index.cshtml",
+              "ToolTip": "C:\\Users\\hualv\\OneDrive\\Documents\\webnc-smatphone\\SmartphoneWeb\\SmartphoneWeb\\Views\\Category\\Index.cshtml",
+              "RelativeToolTip": "SmartphoneWeb\\Views\\Category\\Index.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACgAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-30T02:18:17.28Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
