@@ -21,7 +21,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Category> Categories { get; set; }
 
-    public virtual DbSet<Customer> Customers { get; set; }
+    public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
 
@@ -39,7 +39,9 @@ public partial class AppDbContext : DbContext
         {
             entity.HasKey(e => e.CartId).HasName("PK__Carts__2EF52A272B5643A4");
 
-            entity.HasOne(d => d.Customer).WithOne(p => p.Cart).HasConstraintName("FK__Carts__customer___59FA5E80");
+            entity.HasOne(d => d.User).WithOne(p => p.Cart)
+                .HasForeignKey<Cart>(d => d.UserId)
+                .HasConstraintName("FK__Carts__user___59FA5E80");
         });
 
         modelBuilder.Entity<CartItem>(entity =>
@@ -60,11 +62,12 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.CategoryDate).HasDefaultValueSql("(getdate())");
         });
 
-        modelBuilder.Entity<Customer>(entity =>
+        modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__CD65CB85C410E1B8");
+            entity.HasKey(e => e.UserId).HasName("PK__Customer__CD65CB85C410E1B8");
 
-            entity.Property(e => e.CustomerDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.CreateDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.Role).HasDefaultValue(Role.User);
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -74,7 +77,9 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.OrderDate).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.OrdersStatus).HasDefaultValue("Chờ xác nhận");
 
-            entity.HasOne(d => d.Customer).WithMany(p => p.Orders).HasConstraintName("FK__Orders__customer__6383C8BA");
+            entity.HasOne(d => d.User).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__Orders__user__6383C8BA");
         });
 
         modelBuilder.Entity<OrderDetail>(entity =>

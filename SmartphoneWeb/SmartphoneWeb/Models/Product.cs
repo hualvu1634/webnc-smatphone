@@ -24,9 +24,7 @@ public partial class Product
     [Column("price", TypeName = "decimal(10, 2)")]
     public decimal Price { get; set; }
 
-    [Column("image_url")]
-    [StringLength(255)]
-    [Unicode(false)]
+    [Column("image_url", TypeName = "nvarchar(max)")] 
     public string? ImageUrl { get; set; }
 
     [Column("quantity")]

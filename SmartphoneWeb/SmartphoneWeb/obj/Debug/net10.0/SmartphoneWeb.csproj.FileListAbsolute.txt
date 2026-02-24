@@ -223,3 +223,4 @@ C:\Users\hualv\OneDrive\Documents\webnc-smatphone\SmartphoneWeb\SmartphoneWeb\ob
 C:\Users\hualv\OneDrive\Documents\webnc-smatphone\SmartphoneWeb\SmartphoneWeb\obj\Debug\net10.0\SmartphoneWeb.pdb
 C:\Users\hualv\OneDrive\Documents\webnc-smatphone\SmartphoneWeb\SmartphoneWeb\obj\Debug\net10.0\SmartphoneWeb.genruntimeconfig.cache
 C:\Users\hualv\OneDrive\Documents\webnc-smatphone\SmartphoneWeb\SmartphoneWeb\obj\Debug\net10.0\ref\SmartphoneWeb.dll
+C:\Users\hualv\OneDrive\Documents\webnc-smatphone\SmartphoneWeb\SmartphoneWeb\obj\Debug\net10.0\SmartphoneWeb.sourcelink.json

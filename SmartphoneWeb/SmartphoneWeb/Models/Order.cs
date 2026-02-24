@@ -12,8 +12,8 @@ public partial class Order
     [Column("order_id")]
     public int OrderId { get; set; }
 
-    [Column("customer_id")]
-    public int? CustomerId { get; set; }
+    [Column("user_id")]
+    public int? UserId { get; set; }
 
     [Column("address")]
     [StringLength(255)]
@@ -34,9 +34,9 @@ public partial class Order
     [StringLength(50)]
     public string? OrdersStatus { get; set; }
 
-    [ForeignKey("CustomerId")]
+    [ForeignKey("UserId")]
     [InverseProperty("Orders")]
-    public virtual Customer? Customer { get; set; }
+    public virtual User? User { get; set; }
 
     [InverseProperty("Order")]
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();

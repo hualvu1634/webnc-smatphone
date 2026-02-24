@@ -6,20 +6,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SmartphoneWeb.Models;
 
-[Index("CustomerId", Name = "UQ__Carts__CD65CB84F6BA1264", IsUnique = true)]
+[Index("UserId", Name = "UQ__Carts__CD65CB84F6BA1264", IsUnique = true)]
 public partial class Cart
 {
     [Key]
     [Column("cart_id")]
     public int CartId { get; set; }
 
-    [Column("customer_id")]
-    public int? CustomerId { get; set; }
+    [Column("user_id")]
+    public int? UserId { get; set; }
 
     [InverseProperty("Cart")]
     public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
 
-    [ForeignKey("CustomerId")]
+    [ForeignKey("UserId")]
     [InverseProperty("Cart")]
-    public virtual Customer? Customer { get; set; }
+    public virtual User? User { get; set; }
 }
