@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartphoneWeb.Models;
 using SmartphoneWeb.Service;
 
 namespace SmartphoneWeb.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly CategoryService categoryService;

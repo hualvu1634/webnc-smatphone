@@ -1,0 +1,118 @@
+﻿@model SmartphoneWeb.Requests.LoginRequest
+@{
+    ViewData["Title"] = "Đăng nhập";
+    Layout = null; 
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f6f9ff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .login-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-title {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .form-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            border-radius: 0;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+        }
+
+            .form-control:focus {
+                border-color: #dc3545;
+                box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+            }
+
+        .btn-login {
+            background-color: #dc3545; /* Màu đỏ giống trong hình */
+            border: none;
+            border-radius: 0;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+            .btn-login:hover {
+                background-color: #c82333;
+            }
+
+        .register-link-container {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 15px;
+            color: #666;
+        }
+
+        .register-link {
+            color: #dc3545;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+            .register-link:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h2 class="login-title">Đăng nhập</h2>
+
+        <form asp-action="Login" asp-controller="Auth" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3" style="font-size: 14px;"></div>
+
+            <div class="mb-3">
+                <label class="form-label">Tài khoản</label>
+                <input asp-for="Email" class="form-control" required />
+                <span asp-validation-for="Email" class="text-danger" style="font-size: 12px;"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Mật khẩu</label>
+                <input asp-for="Password" type="password" class="form-control" required />
+                <span asp-validation-for="Password" class="text-danger" style="font-size: 12px;"></span>
+            </div>
+
+            <button type="submit" class="btn btn-danger btn-login w-100">ĐĂNG NHẬP</button>
+        </form>
+
+        <div class="register-link-container">
+            Chưa có tài khoản? <a href="/Auth/Register" class="register-link">Đăng ký ngay</a>
+        </div>
+    </div>
+
+</body>
+</html>

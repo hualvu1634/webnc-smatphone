@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin Panel</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    
+    <style>
+        /* Tông màu nền chuẩn NiceAdmin */
+        body { background-color: #f6f9ff; color: #444444; font-family: 'Segoe UI', sans-serif; }
+        
+        /* Header (Thanh điều hướng trên) */
+        .admin-header { height: 60px; background-color: #ffffff; box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1); position: fixed; top: 0; left: 0; right: 0; z-index: 999; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
+        .admin-logo { font-size: 24px; font-weight: 700; color: #012970; text-decoration: none; }
+        
+        /* Sidebar (Thanh menu trái) */
+        .admin-sidebar { width: 260px; background-color: #ffffff; box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1); position: fixed; top: 60px; bottom: 0; left: 0; padding: 20px 15px; overflow-y: auto; }
+        .admin-sidebar .nav-link { color: #012970; font-weight: 600; padding: 10px 15px; border-radius: 4px; margin-bottom: 5px; text-decoration: none; display: block; }
+        .admin-sidebar .nav-link:hover, .admin-sidebar .nav-link.active { background-color: #f6f9ff; color: #4154f1; }
+        .nav-heading { font-size: 12px; color: #899bbd; font-weight: bold; text-transform: uppercase; margin: 15px 0 5px 15px; }
+        
+        /* Nội dung chính bên phải */
+        .admin-main { margin-left: 260px; margin-top: 60px; padding: 30px; }
+        
+        /* Thiết kế các thẻ (Card) giống NiceAdmin */
+        .nice-card { background: #ffffff; border: none; border-radius: 8px; box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1); margin-bottom: 30px; padding: 20px; }
+        .nice-card-title { font-size: 18px; font-weight: 500; color: #012970; margin-bottom: 15px; }
+        .nice-card-title span { color: #899bbd; font-size: 14px; font-weight: 400; }
+    </style>
+</head>
+<body>
+
+    <header class="admin-header">
+        <a href="#" class="admin-logo">NiceAdmin</a>
+        <div>
+            <span class="fw-bold me-3 text-dark">Xin chào, Admin</span>
+            <a asp-controller="Auth" asp-action="Logout" class="btn btn-outline-danger btn-sm fw-bold">Đăng xuất</a>
+        </div>
+    </header>
+
+    <aside class="admin-sidebar">
+        <div class="nav-heading">Trang chủ</div>
+     
+
+        <a class="nav-link" asp-controller="Category" asp-action="Index">Danh mục</a>
+        <a class="nav-link" href="#">Sản phẩm</a>
+        <a class="nav-link" href="#">Đơn hàng</a>
+    </aside>
+
+    <main class="admin-main">
+        @RenderBody()
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

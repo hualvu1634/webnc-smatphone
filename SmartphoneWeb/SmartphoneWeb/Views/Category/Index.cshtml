@@ -1,41 +1,101 @@
 ﻿@model IEnumerable<SmartphoneWeb.Models.Category>
-
 @{
-    ViewData["Title"] = "Danh sách danh mục";
+    ViewData["Title"] = "Quản lý Danh mục";
+    // Dòng này giúp trang Category chui tọt vào cái khung Admin bạn đã tạo
+    Layout = "_AdminLayout";
 }
 
-<h1>Danh sách danh mục</h1>
+<div class="mb-4 d-flex justify-content-between align-items-center">
+    <div>
+        <h3 style="color: #012970; font-weight: 600; margin: 0;">Danh mục sản phẩm</h3>
+        <small style="color: #899bbd;">Quản lý cửa hàng / Danh mục</small>
+    </div>
+    <button class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#categoryModal" onclick="openCreateModal()">
+        + Thêm danh mục
+    </button>
+</div>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Tạo mới</a>
-</p>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Mã Danh Mục</th>
-            <th>Tên Danh Mục</th>
-            <th>Ngày Tạo</th>
-            <th>Thao tác</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryDate)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.CategoryId" class="btn btn-sm btn-warning">Sửa</a> |
-                    <a asp-action="Delete" asp-route-id="@item.CategoryId" class="btn btn-sm btn-danger">Xóa</a>
-                </td>
-            </tr>
+<div class="nice-card">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Mã DM</th>
+                    <th>Tên Danh Mục</th>
+                    <th>Ngày Tạo</th>
+                    <th class="text-center">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.CategoryId</td>
+                        <td class="fw-bold" style="color: #4154f1;">@item.CategoryName</td>
+                        <td>@(item.CategoryDate.HasValue? item.CategoryDate.Value.ToString("dd/MM/yyyy") : "")</td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-outline-warning fw-bold" onclick="openEditModal(@item.CategoryId, '@item.CategoryName', '@item.CategoryDate')">Sửa</button>
+                            <form asp-action="Delete" asp-route-id="@item.CategoryId" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc chắn muốn xóa danh mục: @item.CategoryName không?');">
+                                <button type="submit" class="btn btn-sm btn-outline-danger fw-bold">Xóa</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="categoryModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <form id="categoryForm" method="post" asp-action="Create">
+                <div class="modal-header bg-light border-bottom-0">
+                    <h5 class="modal-title fw-bold" style="color: #012970;" id="modalTitle">Danh mục</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <input type="hidden" id="CategoryId" name="CategoryId" value="0" />
+                    <input type="hidden" id="CategoryDate" name="CategoryDate" value="" />
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold" style="color: #012970;">Tên Danh Mục</label>
+                        <input type="text" id="CategoryName" name="CategoryName" class="form-control" required placeholder="Ví dụ: iPhone, Samsung..." />
+                    </div>
+                </div>
+
+                <div class="modal-footer bg-light border-top-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+                    <button type="submit" class="btn btn-primary fw-bold">Lưu thông tin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Mở form Thêm mới (làm sạch dữ liệu)
+        function openCreateModal() {
+            document.getElementById('modalTitle').innerText = 'Tạo mới danh mục';
+            document.getElementById('categoryForm').action = '/Category/Create';
+            document.getElementById('CategoryId').value = '0';
+            document.getElementById('CategoryDate').value = '';
+            document.getElementById('CategoryName').value = '';
         }
-    </tbody>
-</table>
+
+        // Mở form Sửa (đổ dữ liệu có sẵn vào)
+        function openEditModal(id, name, date) {
+            document.getElementById('modalTitle').innerText = 'Chỉnh sửa danh mục';
+            document.getElementById('categoryForm').action = '/Category/Edit/' + id;
+            document.getElementById('CategoryId').value = id;
+            document.getElementById('CategoryDate').value = date;
+            document.getElementById('CategoryName').value = name;
+
+            // Kích hoạt hiển thị modal
+            var myModal = new bootstrap.Modal(document.getElementById('categoryModal'));
+            myModal.show();
+        }
+    </script>
+}
