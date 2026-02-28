@@ -15,7 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<CategoryService, CategoryImplService>();
 builder.Services.AddScoped<AuthService, AuthImplService>();
-
+builder.Services.AddScoped<ProductService, ProductImplService>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {

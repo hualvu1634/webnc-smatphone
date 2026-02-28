@@ -1,0 +1,176 @@
+﻿@model IEnumerable<SmartphoneWeb.Models.Product>
+@{
+    ViewData["Title"] = "Quản lý Sản phẩm";
+    Layout = "_AdminLayout";
+}
+
+<div class="mb-4 d-flex justify-content-between align-items-center">
+    <div>
+        <h3 style="color: #012970; font-weight: 600; margin: 0;">Sản phẩm</h3>
+        <small style="color: #899bbd;">Quản lý cửa hàng / Sản phẩm</small>
+    </div>
+
+    <form asp-action="Index" method="get" class="d-flex w-50 mx-4">
+        <input type="text" name="keyword" value="@ViewBag.Keyword" class="form-control me-2" placeholder="Tìm kiếm theo tên sản phẩm..." />
+        <button type="submit" class="btn btn-outline-primary fw-bold">Tìm</button>
+        @if (!string.IsNullOrEmpty(ViewBag.Keyword))
+        {
+            <a asp-action="Index" class="btn btn-link text-danger text-decoration-none">Hủy</a>
+        }
+    </form>
+
+    <button class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#productModal" onclick="openCreateModal()">
+        + Thêm sản phẩm
+    </button>
+</div>
+
+<div class="nice-card">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Hình ảnh</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Danh mục</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Ngày Tạo</th>
+                    <th class="text-center">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ProductId</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.ImageUrl))
+                            {
+                                <img src="@item.ImageUrl" alt="@item.ProductName" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;" />
+                            }
+                            else
+                            {
+                                <span class="text-muted">No Image</span>
+                            }
+                        </td>
+                        <td class="fw-bold" style="color: #4154f1;">@item.ProductName</td>
+                        <td>@(item.Category != null ? item.Category.CategoryName : "N/A")</td>
+                        <td>@item.Price.ToString("N0") VNĐ</td>
+                        <td>@item.Quantity</td>
+                        <td>@(item.ProductDate.HasValue? item.ProductDate.Value.ToString("dd/MM/yyyy") : "")</td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-outline-warning fw-bold"
+                                    onclick="openEditModal(@item.ProductId, '@Html.Raw(item.ProductName)', '@Html.Raw(item.Descriptions)', @item.Price.ToString("0.##"), '@item.ImageUrl', @(item.Quantity ?? 0), @(item.CategoryId ?? 0))">
+                                Sửa
+                            </button>
+                            <form asp-action="Delete" asp-route-id="@item.ProductId" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm: @item.ProductName không?');">
+                                <button type="submit" class="btn btn-sm btn-outline-danger fw-bold">Xóa</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <form id="productForm" method="post" asp-action="Create">
+                <div class="modal-header bg-light border-bottom-0">
+                    <h5 class="modal-title fw-bold" style="color: #012970;" id="modalTitle">Sản phẩm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body row g-3">
+                    <input type="hidden" id="ProductId" name="ProductId" value="0" />
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold" style="color: #012970;">Tên Sản Phẩm</label>
+                        <input type="text" id="ProductName" name="ProductName" class="form-control" required />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold" style="color: #012970;">Danh Mục</label>
+                        <select id="CategoryId" name="CategoryId" class="form-select" required>
+                            <option value="">-- Chọn danh mục --</option>
+                            @if (ViewBag.Categories != null)
+                            {
+                                foreach (var cat in ViewBag.Categories)
+                                {
+                                    <option value="@cat.CategoryId">@cat.CategoryName</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold" style="color: #012970;">Giá (VNĐ)</label>
+                        <input type="number" step="0.01" id="Price" name="Price" class="form-control" required />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold" style="color: #012970;">Số Lượng</label>
+                        <input type="number" id="Quantity" name="Quantity" class="form-control" />
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-bold" style="color: #012970;">Link Hình Ảnh (URL)</label>
+                        <input type="text" id="ImageUrl" name="ImageUrl" class="form-control" />
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-bold" style="color: #012970;">Mô tả</label>
+                        <textarea id="Descriptions" name="Descriptions" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer bg-light border-top-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+                    <button type="submit" class="btn btn-primary fw-bold">Lưu thông tin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Mở form Thêm mới (làm sạch dữ liệu)
+        function openCreateModal() {
+            document.getElementById('modalTitle').innerText = 'Tạo mới sản phẩm';
+            document.getElementById('productForm').action = '/Product/Create';
+
+            document.getElementById('ProductId').value = '0';
+            document.getElementById('ProductName').value = '';
+            document.getElementById('Descriptions').value = '';
+            document.getElementById('Price').value = '';
+            document.getElementById('ImageUrl').value = '';
+            document.getElementById('Quantity').value = '';
+            document.getElementById('CategoryId').value = '';
+        }
+
+        // Mở form Sửa (đổ dữ liệu có sẵn vào)
+        function openEditModal(id, name, desc, price, imgUrl, qty, catId) {
+            document.getElementById('modalTitle').innerText = 'Chỉnh sửa sản phẩm';
+            document.getElementById('productForm').action = '/Product/Edit/' + id;
+
+            document.getElementById('ProductId').value = id;
+            document.getElementById('ProductName').value = name;
+            document.getElementById('Descriptions').value = desc;
+            document.getElementById('Price').value = price;
+
+            // Xử lý null cho ImageUrl
+            document.getElementById('ImageUrl').value = (imgUrl && imgUrl !== 'null') ? imgUrl : '';
+
+            document.getElementById('Quantity').value = qty;
+            document.getElementById('CategoryId').value = catId;
+
+            // Kích hoạt hiển thị modal
+            var myModal = new bootstrap.Modal(document.getElementById('productModal'));
+            myModal.show();
+        }
+    </script>
+}
